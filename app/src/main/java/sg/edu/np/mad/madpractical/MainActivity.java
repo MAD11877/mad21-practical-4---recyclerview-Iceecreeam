@@ -39,24 +39,28 @@ public class MainActivity extends AppCompatActivity {
                 u=us;
             }
         }
-        setFollowBtn();
+        setFollowBtn(false);
 
     }
 
 
-    private void setFollowBtn() {
+    private void setFollowBtn(boolean toast) {
 
 
         Button b = findViewById(R.id.btnFollow);
         if(u.followed) {
             b.setText("Unfollow");
             Context context = getApplicationContext();
-            Toast.makeText(context, "Followed", Toast.LENGTH_SHORT).show();
+            if(toast){
+                Toast.makeText(context, "Followed", Toast.LENGTH_SHORT).show();
+            }
         }
         else {
             b.setText("Follow");
             Context context = getApplicationContext();
-            Toast.makeText(context, "Unfollowed", Toast.LENGTH_SHORT).show();
+            if(toast) {
+                Toast.makeText(context, "Unfollowed", Toast.LENGTH_SHORT).show();
+            }
         }
         for (int i=0; i < UserListSingleton.getInstance().UserList.size(); i++){
             User us = UserListSingleton.getInstance().UserList.get(i);
@@ -67,7 +71,7 @@ public class MainActivity extends AppCompatActivity {
     }
     public void onFollowClick(View v) {
         u.followed = !u.followed;
-        setFollowBtn();
+        setFollowBtn(true);
     }
 
     @Override
